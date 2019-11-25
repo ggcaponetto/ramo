@@ -1,0 +1,28 @@
+{
+  "name": "ramo",
+  "version": "1.0.0",
+  "description": "A K-Dimensional Tree implementation for the web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --validate --debug",
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
+    "asbuild:testbuild": "cp -r -v build test",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized && asbuild:testbuild"
+  },
+  "keywords": [
+    "K-D",
+    "Tree",
+    "kdt",
+    "k-d-tree",
+    "space",
+    "search",
+    "spacial",
+    "index"
+  ],
+  "author": "Giuseppe Giulio Caponetto",
+  "license": "MIT",
+  "dependencies": {
+    "assemblyscript": "^0.8.1"
+  }
+}

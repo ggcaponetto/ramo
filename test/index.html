@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    try {
+	    const imports = {
+		    env: {
+			    abort(_msg, _file, line, column) {
+				    console.error("abort called at index.ts:" + line + ":" + column);
+			    }
+		    }
+	    };
+	    WebAssembly.instantiateStreaming(fetch('build/optimized.wasm'), imports)
+		    .then(results => {
+			    // Do something with the results!
+                // 	    new WebAssembly.Instance(compiled, imports).exports
+                // results.instance.exports.add
+                console.log(`wasm loaded`, results);
+                window.ramo = results.instance;
+		    });
+    }catch (e) {
+        alert(e.message)
+    }
+    function test() {
+	    let result = window.ramo.exports.add(1, 1);
+	    alert(result);
+    }
+</script>
+<div>
+    <button onclick="test()">test</button>
+</div>
+</body>
+</html>
